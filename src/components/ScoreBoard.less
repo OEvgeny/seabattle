@@ -1,0 +1,47 @@
+@import '../less/variables.less';
+
+.score-board {
+  display: flex;
+  cursor: default;
+  color: @text-color;
+  font-weight: 500;
+
+  .player-scores {
+    flex: auto;
+    display: flex;
+    flex-flow: column nowrap;
+    text-align: center;
+    
+    &.player-1 {
+      background-color: @player-1-color;
+    }
+  
+    &.player-2 {
+      background-color: @player-2-color;      
+    }
+
+    .score-count {
+      margin: 0 12px;
+      padding: 36px;
+      font-size: 42px;
+      border-bottom: 1px solid @text-color;
+    }
+  
+    .player-name {
+      font-size: 32px;
+      padding: 22px;
+    }
+  }
+
+  @media screen and (max-width: @tablet-width) {
+    .player-scores .score-count {
+      padding: 18px;      
+      font-size: 21px;      
+    }
+    
+    .player-scores .player-name {
+      padding: 11px;
+      font-size: 16px;
+    }    
+  }
+}

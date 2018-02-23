@@ -1,0 +1,21 @@
+<svg width="300" height="300" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="300" height="300" fill="none" stroke="grey" stroke-width="1"/>
+  <path d="M 30 0 30 300" stroke="grey" stroke-width="1" />
+  <path d="M 60 0 60 300" stroke="grey" stroke-width="1" />
+  <path d="M 90 0 90 300" stroke="grey" stroke-width="1" />
+  <path d="M 120 0 120 300" stroke="grey" stroke-width="1" />
+  <path d="M 150 0 150 300" stroke="grey" stroke-width="1" />
+  <path d="M 180 0 180 300" stroke="grey" stroke-width="1" />
+  <path d="M 210 0 210 300" stroke="grey" stroke-width="1" />
+  <path d="M 240 0 240 300" stroke="grey" stroke-width="1" />
+  <path d="M 270 0 270 300" stroke="grey" stroke-width="1" />
+  <path d="M 0 30 300 30" stroke="grey" stroke-width="1" />
+  <path d="M 0 60 300 60" stroke="grey" stroke-width="1" />
+  <path d="M 0 90 300 90" stroke="grey" stroke-width="1" />
+  <path d="M 0 120 300 120" stroke="grey" stroke-width="1" />
+  <path d="M 0 150 300 150" stroke="grey" stroke-width="1" />
+  <path d="M 0 180 300 180" stroke="grey" stroke-width="1" />
+  <path d="M 0 210 300 210" stroke="grey" stroke-width="1" />
+  <path d="M 0 240 300 240" stroke="grey" stroke-width="1" />
+  <path d="M 0 270 300 270" stroke="grey" stroke-width="1" />
+</svg>

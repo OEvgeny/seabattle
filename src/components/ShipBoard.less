@@ -1,0 +1,65 @@
+@import '../less/variables.less';
+
+.ship-board {
+  display: flex;
+  flex-flow: column nowrap;
+
+  .ship {
+    display: flex;
+    
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+
+    .ship-image {
+      width: 50%;
+      flex: none;
+      > img {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    .ship-hits {
+      display: flex;
+      align-items: center;
+      margin-left: 22px;
+      overflow: hidden;
+    }
+
+    .ship-hitpoint {
+      width: 32px;
+      height: 32px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+
+      &.hit {
+        background-image: url('../assets/hit-small.png');
+      }
+      &.ok {
+        background-image: url('../assets/miss-small.png');
+      }
+    }
+  }
+
+  @media screen and (max-width: @tablet-width) {
+    flex-wrap: wrap;
+
+    .ship {
+      width: 50%;
+      &:not(:last-child) {
+        margin-bottom: 10px;
+      }
+
+      .ship-image {
+        width: 40%;        
+      }
+      
+      .ship-hitpoint {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+}
