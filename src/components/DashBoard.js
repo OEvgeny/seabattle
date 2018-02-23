@@ -30,8 +30,8 @@ const shipsLayout = [
   { size: 2, image: carrierImg }
 ];
 
-const GAME_MODE = {
-  PLAYER_1: 'player-1',
+const GAME_STATE = {
+  PLAYER_1_TURN: 'player-1',
   OVER: 'over'
 };
 
@@ -41,10 +41,8 @@ export class DashBoard extends PureComponent {
 
   state = {
     size: FIELD_SIZE,
-    mode: GAME_MODE.PLAYER_1,
-    [GAME_MODE.PLAYER_1]: {
-      ...genRandomField(FIELD_SIZE, shipsLayout)
-    }
+    gameState: GAME_STATE.PLAYER_1_TURN,
+    ...this.reset()
   }
 
   /**
@@ -94,7 +92,7 @@ export class DashBoard extends PureComponent {
       const newField = this.updateCell(field, cell.x, cell.y, { state: cell.state === CELL_STATE.SHIP ? CELL_STATE.HIT : CELL_STATE.MISS });
       const newShips = cell.ship !== -1 ? this.updateShip(ships, cell.ship, { life: ships[cell.ship].life - 1 }) : ships;
       return {
-        mode: newShips.every(ship => ship.life === 0) ? GAME_MODE.OVER : GAME_MODE.PLAYER_1,
+        gameState: newShips.every(ship => ship.life === 0) ? GAME_STATE.OVER : GAME_STATE.PLAYER_1_TURN,
         player: {
           field: newField,
           ships: newShips
@@ -109,8 +107,8 @@ export class DashBoard extends PureComponent {
    */
   reset() {
     return {
-      mode: GAME_MODE.PLAYER_1,
-      [GAME_MODE.PLAYER_1]: genRandomField(FIELD_SIZE, shipsLayout)
+      gameState: GAME_STATE.PLAYER_1_TURN,
+      [GAME_STATE.PLAYER_1_TURN]: genRandomField(FIELD_SIZE, shipsLayout)
     }
   }
 
@@ -120,17 +118,17 @@ export class DashBoard extends PureComponent {
    */
   handleAction = (data) => {
     this.setState(state => {
-      switch (state.mode) {
-        case GAME_MODE.OVER:
+      switch (state.gameState) {
+        case GAME_STATE.OVER:
           return this.reset();
-        case GAME_MODE.PLAYER_1:
+        case GAME_STATE.PLAYER_1_TURN:
           const {x, y} = data;
-          const playerState = state[state.mode]
+          const playerState = state[state.gameState]
           const cell = playerState.field[x][y];
           const result = this.ply(playerState, cell);
           return result && {
-            mode: result.mode,
-            [state.mode]: result.player
+            gameState: result.gameState,
+            [state.gameState]: result.player
           };
         default:
           return;
@@ -143,7 +141,7 @@ export class DashBoard extends PureComponent {
   }
 
   getScroes(state) {
-    const player = this.state[GAME_MODE.PLAYER_1].ships.reduce((acc, ship) => acc + (ship.size - ship.life), 0);
+    const player = this.state[GAME_STATE.PLAYER_1_TURN].ships.reduce((acc, ship) => acc + (ship.size - ship.life), 0);
     return [player, 0];
   }
 
@@ -153,9 +151,9 @@ export class DashBoard extends PureComponent {
   }
 
   render() {
-    const { mode } = this.state;
-    const isGameOver =  mode === GAME_MODE.OVER;
-    const playerName = isGameOver ? GAME_MODE.PLAYER_1 : mode;
+    const { gameState } = this.state;
+    const isGameOver =  gameState === GAME_STATE.OVER;
+    const playerName = isGameOver ? GAME_STATE.PLAYER_1_TURN : gameState;
     const cells = this.getCells(this.state[playerName].field);
     return (
       <div className="dashboard" {...this.props}>
